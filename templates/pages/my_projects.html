@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Project Title</th>
+                    <th scope="col">Project Description</th>
+                    <th scope="col">Project Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description }}</td>
+                        <td>{{ project.grade }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

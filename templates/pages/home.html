@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="h1">Welcome to Project Grading System</h1>
+<p id="animated-text" class="animated-text">
+  Step into a world where grading student projects becomes effortless and
+  insightful. Our project grading system redefines the way instructors evaluate
+  assignments and provide feedback, empowering both educators and students
+  alike.<br />
+  With our innovative platform, instructors can effortlessly manage assignments,
+  customize grading criteria, and deliver personalized feedback tailored to each
+  student's needs. Meanwhile, students can track their progress, access
+  resources, and elevate their learning experience.<br />
+  Experience the power of technology-driven grading that transforms tedious
+  tasks into seamless processes. Say goodbye to traditional grading methods and
+  embrace a new era of efficiency and engagement with our project grading
+  system.
+</p>
+<script>
+  class TextAnimator {
+    constructor(element, intervalTime = 50) {
+      this.element = element;
+      this.text = element.textContent.trim();
+      this.intervalTime = intervalTime;
+      this.index = 0;
+      this.intervalId = null;
+      this.element.textContent = '';
+    }
+    animate() {
+      this.intervalId = setInterval(() => {
+        if (this.index < this.text.length) {
+          this.element.textContent += this.text[this.index];
+          if (this.text[this.index] === ' ' || this.text[this.index] === '\n') {
+            this.element.textContent += ' ';
+          }
+          this.index++;
+        } else {
+          clearInterval(this.intervalId);
+        }
+      }, this.intervalTime);
+    }
+  }
+  const animatedTextElement = document.getElementById('animated-text');
+  const textAnimator = new TextAnimator(animatedTextElement);
+  textAnimator.animate();
+</script>
+{% endblock %}

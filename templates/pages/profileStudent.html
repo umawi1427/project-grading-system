@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% csrf_token %}
+{% if user.profile.major != 'student' %}
+<p class="error">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p>
+{% else %}
+    <form class="form" method="POST" enctype="multipart/form-data">
+        <p id="successMessage">Hi {{ user.username }}, You have successfully logged into the Project Grading System. We’re delighted to have you here</p>
+        {% csrf_token %}
+        {{ form.name.label_tag }} {{ form.name }}
+        {{ form.description.label_tag }} {{ form.description }}
+        {{ form.teacher.label_tag }} {{ form.teacher }}
+        <label style="background-color: grey; height: 40px" class="custom-file-label" for="{{ form.file.id_for_label }}">
+            {{ form.file }}
+            <div>Click to upload your project</div>
+        </label>
+        <input type="submit" value="Submit Project">
+    </form>
+{% endif %}
+<script>
+    setTimeout(function() {
+        document.getElementById('successMessage').style.display = 'none';
+    }, 10000);
+</script>
+{% endblock %}

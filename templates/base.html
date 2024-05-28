@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+    <title>PGS</title>
+    <link rel="icon" href="{% static 'multaka/images/1.png' %}">
+    <link rel="stylesheet" href="{% static 'multaka/style.css' %}">
+  </head>
+  <body>
+    <body>
+      <div>
+         <div class="wave"></div>
+         <div class="wave"></div>
+         <div class="wave"></div>
+      </div>
+    </body>
+    <div class="navbar">
+      <a href="{% url 'home' %}">Home</a>
+      {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}">Log in</a>
+      <a href="{% url 'signup' %}">Sign up</a>
+      {% endif %}
+      {% if user.is_authenticated %} 
+      {% if request.user.profile.major == 'student'%}
+      <a href="{% url 'profileStudent' %}">Submit Project</a>
+      <a href="{% url 'my_projects' %}">My Projects</a>
+      {% elif user.profile.major == 'teacher' %}
+      <a href="{% url 'profileTeacher' %}">Teacher Page</a>
+      {% endif %}
+      {% if user.username == 'PGS'%}
+      <a href="{% url 'admin_page' %}">Admin Page</a>
+      {% endif %}
+      <a href="{% url 'logout' %}">Log out</a>
+      {% endif %}
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="form" method="POST">
+        {% csrf_token %}
+        {% if guest or notmatch %}
+        <p class="error" style="color: red">Incorrect Username or Password</p>
+        {% endif %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <p class="error" class="{{ message.tags }}" style="color: green; border: 1px solid green;">{{ message }}</p>
+            {% else %}
+                <p class="{{ message.tags }}" style="color: red">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username"><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password"><br>
+        <input type="submit" value="Log in">
+        <div style="text-align: center; margin-top:10px">
+            <a style="margin-top: 10px; text-decoration: none; border: none; color:#333;" href="{% url 'password_reset' %}">Forgot Password?</a>
+        </div>
+    </form>
+{% endblock %}

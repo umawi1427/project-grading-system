@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form class="form" id="contactForm" action="https://formspree.io/f/xleqzodj" method="POST">
+        <p id="successMessage" style="display: none;">Your form was submitted successfully!</p>
+        <p id="errorMessage" style="display: none; color: red;">There was a problem submitting the form.</p>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required minlength="3"/>
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="_replyto" required minlength="6"/>
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required style="height: 100px; width: 400px; resize: none;" minlength="2" maxlength="250"></textarea>
+        <input type="submit" value="Send">
+    </form>
+    <script>
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
+            var email = $('#email').val();
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailRegex.test(email)) {
+                $("#errorMessage").text("Please enter a valid email address.").show();
+                return;
+            }
+            $.ajax({
+                url : $(this).attr('action') || window.location.pathname,
+                type: "POST",
+                data: $(this).serialize(),
+                complete: function (jqXHR, textStatus) {
+                    $("#successMessage").show();
+                    $("#contactForm")[0].reset();
+                }
+            });
+        });
+    </script>
+</body>
+{% endblock %}

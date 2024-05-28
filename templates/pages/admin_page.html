@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.profile.major != 'admin' %}
+<p class="error">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p>
+{% else %}
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Major</th>
+            <th>Approved</th>
+            <th>Update Major</th>
+            <th>Delete User</th>
+        </tr>
+    {% for profile in profiles %}
+        <form method="POST">
+            {% csrf_token %}
+            <tr>
+                <td>{{ profile.id }}</td>
+                <td>{{ profile.user.username }}</td>
+                <td>{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
+                <td>{{ profile.user.email }}</td>
+                <td>{{ profile.sex }}</td>
+                <td>
+                    <input type="hidden" name="profile_id" value="{{ profile.id }}">
+                    <input type="text" id="major" name="major" value="{{ profile.major }}">
+                </td>
+                <td>
+                    <input type="checkbox" id="is_approved" name="is_approved" {% if profile.is_approved %} checked {% endif %}>
+                    <label for="is_approved">Approved</label>
+                </td>
+                <td><input type="submit" name="action" value="Update Major"></td>
+                <td><input type="submit" name="action" value="Delete User"></td>
+            </tr>
+        </form>
+    {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}

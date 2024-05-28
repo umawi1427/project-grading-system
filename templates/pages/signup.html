@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="form" method="post" action="{% url 'signup' %}">
+    {% if not errors %}
+    <p id="successMessage">Please ensure your email address is entered correctly, as you will receive a confirmation message regarding approval</p>
+    {% endif %}
+    {% csrf_token %}
+    {% if errors %}
+    <p class="error" style="color: red">
+        {% for error in errors %}
+            {% if forloop.counter > 1 %}
+                <a style="text-decoration: none" href="{% url 'login' %}">{{ error }}<br> Try another, or Click to log in</a><br>
+            {% else %}
+                {{ error }}<br>
+            {% endif %}
+        {% endfor %}
+    </p>
+    {% endif %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" required id="username" class="form-control" pattern="[a-zA-Z0-9]+" title="Username should only contain letters and numbers." value="{{ form_data.username }}"> 
+    <label for="email">Email:</label>
+    <input type="email" name="email" required id="email" class="form-control" value="{{ form_data.email }}">
+    <label for="password1">Password:</label>
+    <input type="password" name="password1" required id="password1" class="form-control" pattern=".{6,}" title="Password should be at least 6 characters long.">    
+    <label for="name">Name:</label>
+    <input type="text" name="name" required id="name" class="form-control" pattern="[a-zA-Z\s]+" title="Name should only contain letters and spaces." value="{{ form_data.name }}">    
+    <label for="sex">Gender:</label>
+    <select name="sex" required id="sex" class="form-control">
+        <option value="male" {% if form_data.sex == "male" %}selected{% endif %}>Male</option>
+        <option value="female" {% if form_data.sex == "female" %}selected{% endif %}>Female</option>
+    </select>    
+    <label for="option">Major:</label>
+    <select name="option" required id="option" class="form-control">
+        <option value="student" {% if form_data.major == "student" %}selected{% endif %}>Student</option>
+        <option value="teacher" {% if form_data.major == "teacher" %}selected{% endif %}>Teacher</option>
+    </select>    
+    <input type="submit" value="Sign up" class="btn btn-primary">
+</form>
+{% endblock %}
