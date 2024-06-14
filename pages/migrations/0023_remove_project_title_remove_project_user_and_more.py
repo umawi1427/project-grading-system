@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='project',
             name='file',
-            field=models.FileField(upload_to=pages.models.get_upload_path),
+            field=models.FileField(),
         ),
         migrations.AlterField(
             model_name='project',

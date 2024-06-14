@@ -1,44 +1,43 @@
-{% extends "base.html" %}
-{% block content %}
-{% csrf_token %}
-{% if user.profile.major != 'teacher' %}
-<p class="error">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p>
-{% else %}
-    <p id="successMessage">Hi {{ user.username }}, You have successfully logged into the Project Grading System. We’re delighted to have you here</p>
+{% extends 'base.html' %} {% block content %} {% csrf_token %} {% if user.profile.major != 'teacher' %}
+  <form class="form"><p class="error" style="color: red">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p></form>
+{% else %} {% if projects %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Student</th>
+      <th>File</th>
+      <th>Grade</th>
+      <th>Grade Project</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for project in projects %}
-        <div>
-            <h2>{{ project.name }}</h2>
-            <p>{{ project.description }}</p>
-            <form method="POST" action="{% url 'grade_project' project.id %}">
-                {% csrf_token %}
-                <label for="grade">Grade:</label>
-                <input type="number" id="grade" name="grade" min="0" max="100" step="0.01" value="{{ project.grade }}">
-                <input type="submit" value="Submit Grade">
-            </form>
-        </div>
-    {% empty %}
+    <tr>
+      <form method="post" action="{% url 'grade_project' project.id %}">
+        <td>{{ project.title }}</td>
+        <td><a href="{% url 'download_description' project.id %}" class="download-button">Download PDF</a></td>
+        <td>{{ project.student.get_full_name }}</td>
+        <td>
+          {% if project.file %}
+          <a class="download-button" href="{% url 'download_file' project.file.name %}">Download</a>
+          {% else %} No file uploaded {% endif %}
+        </td>
+        <td>
+          {% csrf_token %} {% if project.grade %}
+          <span>{{ project.grade }}</span>
+          {% endif %}
+        </td>
+        <td>
+          <input type="number" name="grade" min="0" max="100" required />
+          <input type="submit" value="Grade" />
+        </td>
+      </form>
+    </tr>
     {% endfor %}
-    <table class="table">
-        <tr>
-            <th>Project Name</th>
-            <th>Download</th>
-            <th>Grade</th>
-        </tr>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.name }}</td>
-                <td><a href="{{ project.file.url }}" download>Download Project</a></td>
-                <td>{{ project.grade }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="3">No projects found</td>
-            </tr>
-        {% endfor %}
-{% endif %}
-<script>
-    setTimeout(function() {
-        document.getElementById('successMessage').style.display = 'none';
-    }, 10000);
-</script>
-{% endblock %}
+  </tbody>
+</table>
+{% else %}
+<form class="form"><p>No projects assigned to you.</p></form>
+{% endif %} {% endif %} {% endblock %}

@@ -2,24 +2,34 @@
 {% block content %}
 {% csrf_token %}
 {% if user.profile.major != 'student' %}
-<p class="error">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p>
+<form class="form"><p class="error" style="color: red">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p></form>
 {% else %}
-    <form class="form" method="POST" enctype="multipart/form-data">
-        <p id="successMessage">Hi {{ user.username }}, You have successfully logged into the Project Grading System. We’re delighted to have you here</p>
-        {% csrf_token %}
-        {{ form.name.label_tag }} {{ form.name }}
-        {{ form.description.label_tag }} {{ form.description }}
-        {{ form.teacher.label_tag }} {{ form.teacher }}
-        <label style="background-color: grey; height: 40px" class="custom-file-label" for="{{ form.file.id_for_label }}">
-            {{ form.file }}
-            <div>Click to upload your project</div>
-        </label>
-        <input type="submit" value="Submit Project">
-    </form>
+<form class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required minlength="10" maxlength="400"></textarea><br><br>
+    <label for="teacher">Teacher:</label>
+    <select id="teacher" name="teacher" required>
+        {% for teacher in teachers %}
+            <option>Select</option>
+            <option value="{{ teacher.id }}">{{ teacher.profile.get_full_name }}</option>
+        {% endfor %}
+    </select><br><br>
+    <label for="file">File:</label>
+    <input type="file" id="file" name="file" required><br><br>
+    <input type="submit" value="Submit Project">
+</form>
+{% if errors %}
+    <ul>
+    {% for error in errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
 {% endif %}
-<script>
-    setTimeout(function() {
-        document.getElementById('successMessage').style.display = 'none';
-    }, 10000);
-</script>
+{% if request.GET.success_message %}
+    <p class="success">{{ request.GET.success_message }}</p>
+{% endif %}
+{% endif %}
 {% endblock %}

@@ -3,7 +3,7 @@ body {
     padding: 0;
     margin: auto;
     overflow: auto;
-    background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+    background: linear-gradient(315deg, rgba(175, 101, 165, 0.8) 3%, rgba(110, 162, 216, 0.8) 38%, rgba(128, 238, 226, 0.8) 68%, rgba(255, 150, 150, 0.8) 98%);
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
@@ -22,14 +22,14 @@ body {
 }
 
 .wave {
-    background: rgb(255 255 255 / 25%);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 1000% 1000% 0 0;
     position: fixed;
     width: 200%;
     height: 12em;
     animation: wave 10s -3s linear infinite;
     transform: translate3d(0, 0, 0);
-    opacity: 0.8;
+    opacity: 0.7;
     bottom: 0;
     left: 0;
     z-index: -1;
@@ -38,32 +38,28 @@ body {
 .wave:nth-of-type(2) {
     bottom: -1.25em;
     animation: wave 18s linear reverse infinite;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 .wave:nth-of-type(3) {
     bottom: -2.5em;
     animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
+    opacity: 0.5;
 }
 
 @keyframes wave {
     2% {
         transform: translateX(1);
     }
-
     25% {
         transform: translateX(-25%);
     }
-
     50% {
         transform: translateX(-50%);
     }
-
     75% {
         transform: translateX(-25%);
     }
-
     100% {
         transform: translateX(1);
     }
@@ -72,13 +68,14 @@ body {
 .navbar {
     overflow: hidden;
     background-color: #333;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
     position: sticky;
     top: 0;
-    z-index: 100;
     width: 100%;
+    overflow: hidden;
+}
+
+.navbar span {
+    display: none;
 }
   
 .navbar a {
@@ -152,13 +149,19 @@ form {
     font-size: 1em;
 }
 
-.form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form label[for="id_file"] {
+.form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
     width: 400px;
     padding: 10px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
     font-size: 1em;
     box-sizing: border-box;
+}
+
+.form textarea {
+    height: 100px; 
+    width: 400px; 
+    resize: none;
 }
 
 .custom-file-input {
@@ -305,7 +308,7 @@ ul.errorlist{
     color: #009879;
 }
 
-.table input[type="text"], input[type="checkbox"] {
+.table input[type="text"], input[type="checkbox"], input[type="number"], input[type="email"], input[type="password"], select, textarea{
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #dddddd;
@@ -329,4 +332,1201 @@ ul.errorlist{
 .table input[type="submit"]:hover {
     background-color: white;
     color: black;
+}
+
+.table a.download-button {
+    background-color: #009879;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.table a.download-button:hover {
+    background-color: #007b5e;
+}
+
+.usertable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+    font-family: Arial, sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.usertable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.usertable th,
+.usertable td {
+    padding: 12px 15px;
+}
+
+.usertable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.usertable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.usertable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.usertable tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.usertable input[type="text"],
+.usertable input[type="checkbox"],
+.usertable input[type="submit"],
+.usertable a.download-button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
+
+.usertable input[type="submit"],
+.usertable a.download-button {
+    background-color: #009879;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+}
+
+.usertable input[type="submit"]:hover,
+.usertable a.download-button:hover {
+    background-color: #007b5e;
+    color: white;
+}
+
+.table-responsive {
+    position: relative;
+    overflow-x: auto; 
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+
+.table-responsive::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.navbar .icon {
+    display: none;
+}
+
+@media (max-width: 950px) and (min-width: 850px) {
+    .navbar a {
+        font-size: 1.5em;
+        padding: 10px 12px;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    #animated-text {
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 1.2em;
+    }
+
+    form, .form {
+        width: 300px;
+        padding: 15px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 100px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.6em;
+    }
+
+    .table th, .table td {
+        padding: 10px 12px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.6em;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 850px) and (min-width: 750px) {
+    .navbar a {
+        font-size: 1.4em;
+        padding: 9px 11px;
+    }
+
+    h1 {
+        font-size: 2.8em;
+    }
+
+    #animated-text {
+        margin-left: 18px;
+        margin-right: 18px;
+        font-size: 1.1em;
+    }
+
+    form, .form {
+        width: 280px;
+        padding: 14px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 90px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.7em;
+    }
+
+    .table th, .table td {
+        padding: 9px 11px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.7em;
+        padding: 7px;
+    }
+}
+
+@media (max-width: 750px) and (min-width: 650px) {
+    .navbar a {
+        font-size: 1.3em;
+        padding: 8px 10px;
+    }
+
+    h1 {
+        font-size: 2.6em;
+    }
+
+    #animated-text {
+        margin-left: 16px;
+        margin-right: 16px;
+        font-size: 1em;
+    }
+
+    form, .form {
+        width: 260px;
+        padding: 13px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 80px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.6em;
+    }
+
+    .table th, .table td {
+        padding: 8px 10px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.6em;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 650px) and (min-width: 565px) {
+    .navbar a {
+        font-size: 1.2em;
+        padding: 7px 9px;
+    }
+
+    h1 {
+        font-size: 2.4em;
+    }
+
+    #animated-text {
+        margin-left: 14px;
+        margin-right: 14px;
+        font-size: 0.9em;
+    }
+
+    form, .form {
+        width: 240px;
+        padding: 12px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 70px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.5em;
+    }
+
+    .table th, .table td {
+        padding: 7px 9px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.5em;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 565px) and (min-width: 550px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1.1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 1em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 2.1em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+    
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    h1 {
+        font-size: 2.4em;
+    }
+
+    #animated-text {
+        margin-left: 14px;
+        margin-right: 14px;
+        font-size: 0.9em;
+    }
+
+    form, .form {
+        width: 330px;
+        padding: 12px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 70px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.5em;
+    }
+
+    .table th, .table td {
+        padding: 7px 9px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.5em;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 550px) and (min-width: 480px) { 
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1.1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.9em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 2.1em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+       
+    h1 {
+        font-size: 2.2em;
+    }
+
+    #animated-text {
+        margin-left: 12px;
+        margin-right: 12px;
+        font-size: 0.8em;
+    }
+
+    form, .form {
+        width: 280px;
+        padding: 11px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 60px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.4em;
+    }
+
+    .table th, .table td {
+        padding: 6px 8px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.4em;
+        padding: 4px;
+    }
+}
+
+@media (max-width: 480px) and (min-width: 400px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1.1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.87em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 2.1em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #animated-text {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 0.7em;
+    }
+
+    form, .form {
+        width: 200px;
+        padding: 10px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 50px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.3em;
+    }
+
+    .table th, .table td {
+        padding: 5px 7px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.3em;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 400px) and (min-width: 380px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1.1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.8em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 1.8em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #animated-text {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 0.7em;
+    }
+
+    form, .form {
+        width: 200px;
+        padding: 10px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 50px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.3em;
+    }
+
+    .table th, .table td {
+        padding: 5px 7px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.3em;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 380px) and (min-width: 347px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.79em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 1.7em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #animated-text {
+        margin-left: 8px;
+        margin-right: 8px;
+        font-size: 0.6em;
+    }
+
+    form, .form {
+        width: 180px;
+        padding: 9px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 40px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.2em;
+    }
+
+    .table th, .table td {
+        padding: 4px 6px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.2em;
+        padding: 2px;
+    }
+}
+
+@media (max-width: 347px) and (min-width: 330px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 1em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.79em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 1.6em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 10px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #animated-text {
+        margin-left: 8px;
+        margin-right: 8px;
+        font-size: 0.6em;
+    }
+
+    form, .form {
+        width: 180px;
+        padding: 9px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 40px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.2em;
+    }
+
+    .table th, .table td {
+        padding: 4px 6px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.2em;
+        padding: 2px;
+    }
+}
+
+@media (max-width: 330px) and (min-width: 300px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 0.8em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.79em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 1.3em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 13px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #animated-text {
+        margin-left: 8px;
+        margin-right: 8px;
+        font-size: 0.6em;
+    }
+
+    form, .form {
+        width: 180px;
+        padding: 9px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 40px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.2em;
+    }
+
+    .table th, .table td {
+        padding: 4px 6px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.2em;
+        padding: 2px;
+    }
+}
+
+@media (max-width: 300px) and (min-width: 277px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 0.78em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.79em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 1.17em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 13px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #animated-text {
+        margin-left: 8px;
+        margin-right: 8px;
+        font-size: 0.6em;
+    }
+
+    form, .form {
+        width: 180px;
+        padding: 9px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 40px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.2em;
+    }
+
+    .table th, .table td {
+        padding: 4px 6px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.2em;
+        padding: 2px;
+    }
+}
+
+@media (max-width: 277px) and (min-width: 200px) {
+    .navbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar a {
+        display: none;
+    }
+    
+    .navbar a.icon {
+        float: right;
+        display: block;
+        font-size: 0.6em;
+    }
+    
+    .navbar.responsive {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 0.78em;
+    }
+    
+    .navbar .responsive-title {
+        display: inline-block;
+        font-size: 0.9em;
+        margin-right: 10px;
+        vertical-align: middle;
+        color: white;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+
+    .navbar.responsive .responsive-title {
+        display: none;
+    }
+    
+    .navbar .dropdown-content {
+        display: none;
+    }
+    
+    .navbar.responsive .dropdown-content {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    #animated-text {
+        margin-left: 6px;
+        margin-right: 6px;
+        font-size: 0.5em;
+    }
+
+    form, .form {
+        width: 160px;
+        padding: 8px;
+    }
+
+    .form input[type="text"], .form input[type="password"], .form input[type="email"], .form select, .form textarea, .form input[type="file"], .form input[type="number"], .form label[for="id_file"] {
+        width: 100%;
+    }
+
+    .form textarea {
+        height: 30px;
+    }
+
+    .custom-file-label {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.1em;
+    }
+
+    .table th, .table td {
+        padding: 3px 5px;
+    }
+
+    .table input[type="submit"], .table a.download-button {
+        font-size: 0.1em;
+        padding: 1px;
+    }
 }

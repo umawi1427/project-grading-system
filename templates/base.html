@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
   <head>
-    <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+    <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1.0">
     <title>PGS</title>
     <link rel="icon" href="{% static 'multaka/images/1.png' %}">
     <link rel="stylesheet" href="{% static 'multaka/style.css' %}">
@@ -15,7 +15,8 @@
          <div class="wave"></div>
       </div>
     </body>
-    <div class="navbar">
+    <div class="navbar" id="myNavbar">
+      <span class="responsive-title" id="responsiveTitle">Project Grading System</span>
       <a href="{% url 'home' %}">Home</a>
       {% if not user.is_authenticated %}
       <a href="{% url 'login' %}">Log in</a>
@@ -35,7 +36,21 @@
       {% endif %}
       <a href="{% url 'about' %}">About</a>
       <a href="{% url 'contact' %}">Contact</a>
-    </div>
+      <a href="javascript:void(0);" class="icon" onclick="toggleNavbar()">&#9776;</a>
+    </div>     
+    <script>
+        function toggleNavbar() {
+          var navbar = document.getElementById("myNavbar");
+          var title = document.getElementById("responsiveTitle");
+          if (navbar.className === "navbar") {
+              navbar.className += " responsive";
+              title.style.display = "none";
+          } else {
+              navbar.className = "navbar";
+              title.style.display = "inline-block";
+          }
+        }    
+    </script>
     {% block content %}
     {% endblock %}
   </body>

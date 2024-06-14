@@ -1,21 +1,33 @@
-{% extends 'base.html' %}
-{% block content %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Project Title</th>
-                    <th scope="col">Project Description</th>
-                    <th scope="col">Project Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for project in projects %}
-                    <tr>
-                        <td>{{ project.name }}</td>
-                        <td>{{ project.description }}</td>
-                        <td>{{ project.grade }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-{% endblock %}
+{% extends 'base.html' %} {% block content %} {% csrf_token %}
+{% if user.profile.major != 'student' %}
+<form class="form"><p class="error" style="color: red">Dear, you do not have permissions to access this page. We request you to navigate to the page dedicated to your major. Thank you for understanding.</p></form>
+{% else %} {% if projects %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Teacher</th>
+      <th>Grade</th>
+      <th>File</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for project in projects %}
+    <tr>
+      <td>{{ project.title }}</td>
+      <td><a href="{% url 'download_description' project.id %}" class="download-button">Download PDF</a></td>
+      <td>{{ project.teacher.profile.get_full_name }}</td>
+      <td>{{ project.grade }}</td>
+      <td>
+        {% if project.file %}
+        <a class="download-button" href="{% url 'download_file' project.file.name %}">Download</a>
+        {% else %} <p class="error" style="color: red">No file uploaded</p> {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<form class="form"><p>No projects submitted yet.</p></form>
+{% endif %} {% endif %} {% endblock %}

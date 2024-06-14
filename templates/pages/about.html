@@ -1,27 +1,24 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="h1"><strong>About Project Grading System</strong></h1>
 <p id="animated-text" class="animated-text">
-  project grading system is designed to streamline the process of evaluating
-  and providing feedback on student projects. Whether you're an instructor
-  assessing assignments or a student submitting your work, our platform offers a
+  project grading system is designed to streamline the process of evaluating and
+  providing feedback on student projects. Whether you're an instructor assessing
+  assignments or a student submitting your work, our platform offers a
   user-friendly interface and robust functionality to enhance your grading
   experience.<br />
   For instructors, our system provides comprehensive tools for setting up
   assignments, defining grading criteria, and efficiently evaluating student
-  submissions. With features such as customizable rubrics, inline commenting,
-  and gradebook management, instructors can effectively assess student work and
-  provide constructive feedback.<br />
+  submissions.<br />
   Students benefit from an intuitive submission process, clear assignment
-  instructions, and timely feedback from instructors. Our system allows students
-  to submit their projects online, track their progress, and access feedback and
-  grades easily.<br />
+  instructions. Our system allows students to submit their projects online,
+  track their progress, and access grades easily.<br />
   Overall, we aim to create a transparent and efficient grading experience that
   promotes learning, engagement, and collaboration between instructors and
   students. Join us in revolutionizing project grading for the digital age!
 </p>
 <script>
   class TextAnimator {
-    constructor(element, intervalTime = 50) {
+    constructor(element, intervalTime = 20) {
       this.element = element;
       this.text = element.textContent.trim();
       this.intervalTime = intervalTime;
