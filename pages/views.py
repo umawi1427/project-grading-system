@@ -307,7 +307,7 @@ class AdminPageView:
                     send_mail(
                         'Your profile has been approved',
                         'Congratulations, your profile has been approved by the admin. ' + new_major + ' is now your major. You can now login to the system and start using it.',
-                        'projectgradingsystem@gmail.com',
+                        'example@gmail.com',
                         [profile.user.email],
                         fail_silently=False,
                     )
